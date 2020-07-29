@@ -51,7 +51,7 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "User created successfully!", "resourceId": user.GUID})
+	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "User created successfully!", "GUID": user.GUID})
 
 }
 
@@ -177,7 +177,7 @@ func RefreshAccessToken(c *gin.Context) {
 				c.Abort()
 				return
 			} else {
-				c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "message": "Token already used"})
+				c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusOK, "message": "Token already used"})
 				c.Abort()
 				return
 			}
@@ -195,11 +195,12 @@ func DeleteAllRefreshTokens(c *gin.Context) {
 
 	result, err := Collection.DeleteMany(context.TODO(), bson.D{{"Guid", userUUID}})
 	if err != nil {
-		fmt.Print(err)
-		c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "message": "Invalid id"})
+		message := err.Error()
+		c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "message": message})
+		c.Abort()
 		return
 	}
-	fmt.Print(result)
+	c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusOK, "message": string(result.DeletedCount) + " tokens deleted"})
 
 }
 
@@ -245,7 +246,7 @@ func DeleteRefreshToken(c *gin.Context) {
 				if err != nil {
 					log.Fatal(err)
 				}
-				c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "message": "Token deleted"})
+				c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusOK, "message": "Token deleted"})
 				return
 
 			}
