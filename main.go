@@ -19,9 +19,6 @@ func handleRequest() {
 	router.POST("/refresh-token", service.RefreshAccessToken)
 	router.POST("/delete-refresh-token", service.DeleteRefreshToken)
 	router.POST("/delete-refresh-tokens/:uuid", service.DeleteAllRefreshTokens)
-	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
-	})
 
 	port := os.Getenv("PORT")
 	if port == "" {

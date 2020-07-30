@@ -5,6 +5,33 @@
 ## Installation
     This application are deployed in heroku - https://pacific-everglades-72035.herokuapp.com
 
+## Description
+
+  The API supports 5 endpoints.
+  To get started, you need to register a user on the /register path by sending a username and password.
+  After registration, you will receive a response in the form
+
+  ```json
+  {
+      "data": {
+          "message": "User created successfully!",
+          "GUID": "93fdf0e5-00e4-4c66-8d41-369dd35cbd4a",
+          "status": 201
+      }
+  }
+  ```
+  The resulting GUID can be used in further requests
+
+ # DB
+  In this project, a Mongo DB database deployed on Mongo DB Atlas is used.
+  DB uri - mongodb+srv://test:1234@cluster0.5bbqz.mongodb.net/test?retryWrites=true&w=majority
+  DB type - Replica set
+  DB username - test
+  DB passwrod - 1234
+  DB name - test
+  DB collection - users
+
+
 # API
 
 ### HTTP
