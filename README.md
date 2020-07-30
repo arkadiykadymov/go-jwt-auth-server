@@ -36,20 +36,6 @@
 
 ### HTTP
 
-#### `GET /`
-
-```bash
-curl --request GET \
-  --url http://https://pacific-everglades-72035.herokuapp.com/ \
-```
-
-```json
-{"data": "Hello world!"}
-```
-
-Returns "Hello world!"
-
-
 #### `POST /register`
 
 Endpoint for registretion user with specific username and password.
